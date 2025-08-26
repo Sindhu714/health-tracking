@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flexbox Navbar</title>
+  <style>
+    nav {
+  display: flex;
+  justify-content: space-between; /* logo+name on left, menu on right */
+  align-items: center;
+  padding: 0 20px;
+  height: 60px;
+  background: linear-gradient(to bottom, black, brown);
+  border-bottom: 3px solid yellow;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center; /* Align logo and text vertically */
+  gap: 10px; /* Space between logo and text */
+}
+
+.logo {
+  height: 40px;  /* Small logo */
+  width: auto;
+}
+
+.site-name {
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+}
+.ach{
+    text-decoration:underline;
+    
+}
+  </style>
+</head>
+<body>
+ <nav>
+  <div class="logo-container">
+    <img src="C:\Users\l\hack\webicon.png" alt="logo" class="logo">
+    <span class="site-name">MyWebsite</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="home.html">HOME</a></li>
+    <li><a href="#">EXERCISE</a></li>
+    <li><a href="#" >ACHIEVEMENT</a></li>
+    <li><a href="#">ROUTINES</a></li>
+    <li><a href="#">PROFILE</a></li>
+  </ul>
+</nav>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Achievements - RDR2 Style</title>
+ <style>
+    /* RDR2-inspired theme */
+body {
+  margin: 0;
+  font-family: 'Cinzel', serif;
+  background: #2c1a13 url('https://www.transparenttextures.com/patterns/dark-wood.png');
+  color: #f5e6c8;
+}
+
+header {
+  text-align: center;
+  background: linear-gradient(to bottom, #5a0d0d, #2c1a13);
+  color: #ffd700;
+  padding: 30px 10px;
+  border-bottom: 3px solid #ffd700;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+}
+
+.charts-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 25px;
+  padding: 30px;
+}
+
+.chart-card {
+  background: rgba(44, 26, 19, 0.9);
+  border: 2px solid #ffd700;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.7);
+  text-align: center;
+}
+
+.chart-card h2 {
+  color: #ff4d4d;
+  margin-bottom: 15px;
+}
+
+ </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <h1>🏆 Health Achievements</h1>
+  </header>
+
+  <main class="charts-container">
+    <div class="chart-card">
+      <h2>🚶 Steps Progress</h2>
+      <canvas id="stepsChart"></canvas>
+    </div>
+
+    <div class="chart-card">
+      <h2>💧 Hydration</h2>
+      <canvas id="waterChart"></canvas>
+    </div>
+
+    <div class="chart-card">
+      <h2>🏋️ Workouts</h2>
+      <canvas id="workoutsChart"></canvas>
+    </div>
+
+    <div class="chart-card">
+      <h2>🧘 Meditation</h2>
+      <canvas id="meditationChart"></canvas>
+    </div>
+  </main>
+
+  <script>
+    // Random mock data generator
+function getRandom(max) {
+  return Math.floor(Math.random() * max);
+}
+const chartOptions = {
+  responsive: true,
+  plugins: {
+    legend: {
+      labels: {
+        color: '#ffd700',
+        font: { family: 'Cinzel', size: 14 }
+      }
+    }
+  },
+  scales: {
+    x: {
+      ticks: { color: '#f5e6c8' },
+      grid: { color: '#5a3a2b' }
+    },
+    y: {
+      ticks: { color: '#f5e6c8' },
+      grid: { color: '#5a3a2b' }
+    }
+  }
+};
+
+// Create charts
+const stepsChart = new Chart(document.getElementById('stepsChart'), {
+  type: 'line',
+  data: {
+    labels: [],
+    datasets: [{
+      label: 'Steps',
+      data: [],
+      borderColor: '#ff4d4d',
+      backgroundColor: 'rgba(255, 77, 77, 0.3)',
+      tension: 0.3,
+      fill: true
+    }]
+  },
+  options: chartOptions
+});
+
+const waterChart = new Chart(document.getElementById('waterChart'), {
+  type: 'bar',
+  data: {
+    labels: [],
+    datasets: [{
+      label: 'Glasses',
+      data: [],
+      backgroundColor: '#4da6ff'
+    }]
+  },
+  options: chartOptions
+});
+
+const workoutsChart = new Chart(document.getElementById('workoutsChart'), {
+  type: 'radar',
+  data: {
+    labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    datasets: [{
+      label: 'Workouts',
+      data: [],
+      borderColor: '#ffd700',
+      backgroundColor: 'rgba(255, 215, 0, 0.3)'
+    }]
+  },
+  options: chartOptions
+});
+
+const meditationChart = new Chart(document.getElementById('meditationChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ["Completed", "Remaining"],
+    datasets: [{
+      data: [0, 7],
+      backgroundColor: ['#ff4d4d', '#4a2f25'],
+      borderColor: '#ffd700',
+      borderWidth: 2
+    }]
+  },
+  options: chartOptions
+});
+
+// Live updating every 3s
+function updateCharts() {
+  const time = new Date().toLocaleTimeString();
+
+  // Steps (line chart)
+  if (stepsChart.data.labels.length > 10) stepsChart.data.labels.shift();
+  if (stepsChart.data.datasets[0].data.length > 10) stepsChart.data.datasets[0].data.shift();
+  stepsChart.data.labels.push(time);
+  stepsChart.data.datasets[0].data.push(getRandom(10000));
+  stepsChart.update();
+
+  // Water (bar chart)
+  waterChart.data.labels = ["Glasses"];
+  waterChart.data.datasets[0].data = [getRandom(8)];
+  waterChart.update();
+
+  // Workouts (radar chart)
+  workoutsChart.data.datasets[0].data = Array.from({length: 7}, () => getRandom(1));
+  workoutsChart.update();
+
+  // Meditation (doughnut chart)
+  let done = getRandom(7);
+  meditationChart.data.datasets[0].data = [done, 7 - done];
+  meditationChart.update();
+}
+
+setInterval(updateCharts, 3000);
+updateCharts();
+
+  </script>
+</body>
+</html>

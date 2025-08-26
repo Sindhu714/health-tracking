@@ -1,0 +1,143 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: url(loginpageimg.jpg)no-repeat center center fixed;
+    background-size:100% 100% ;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    font-family: sans-serif;
+}
+
+.box{
+
+    margin-top: 30px;
+    padding-left: 100px;
+    background: rgba(255, 255, 255, 0.279);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px); /* For Safari */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 8px 32px 0 burlywood;
+    border: 1px solid rgba(255, 255, 255, 0.304);
+    color: red;
+    top: 50%;
+    left: 78%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+    border : 2px solid black;
+    border-radius: 30px;
+    padding-bottom: 20px;
+    padding-right: 25px;
+}
+
+
+
+.user{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: -50px;
+    left: calc(50% - 50px);
+}
+
+h1{
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 22px;
+    color: black;
+}
+
+p{
+    color: #f49126;
+    margin: 0;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+
+input{
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+ input[type="text"], input[type="password"] ,input[type="email"]
+{
+    
+    border-bottom: 1px solid grey;
+    border-radius: 20px;
+    background: transparent;
+    outline: 1px solid black;
+    height: 40px;
+    color: #673ab7;
+    font-size: 16px;
+}
+input::placeholder{
+    color: #d1b3ff;
+    padding-left: 20px;
+    
+}
+
+input[type="submit"]
+{
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #2196f3;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+
+}
+
+
+input[type="submit"]:hover
+{
+    cursor: pointer;
+    background: #0097a7;
+}
+
+a
+{
+    text-decoration:dotted;
+    font-size: 16px;
+    line-height: 20px;
+    color:#d1b3ff;
+}
+
+
+a:hover
+{
+    color: aquamarine;
+}
+.webname{
+    width:40%;
+    font-size:40px;
+    color:black;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.web{
+    padding-top: 50px;
+    margin-right: 150px;
+    padding-left: 170px;
+
+}
+.webs{
+                                                 
+    padding-top: 0px;
+    margin-right: 250px;
+    padding-left: 170px;
+
+
+}
+
+    .navbar {
+      display: flex;                 
+      justify-content: space-between; /* Space between logo and links */
+      align-items: center;           /* Vertically center items */
+      background: #333;
+      padding: 10px 20px;
+    }
+    .img{
+    }

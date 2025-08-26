@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flexbox Navbar</title>
+  <style>
+    nav {
+  display: flex;
+  justify-content: space-between; /* logo+name on left, menu on right */
+  align-items: center;
+  padding: 0 20px;
+  height: 60px;
+  background: linear-gradient(to bottom, rgb(100, 100, 246),grey);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center; /* Align logo and text vertically */
+  gap: 10px; /* Space between logo and text */
+}
+
+.logo {
+  height: 40px;  /* Small logo */
+  width: auto;
+}
+
+.site-name {
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+.navlinks:hover{
+    transition:scale(1.2) rotate(5deg);
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+}
+  </style>
+</head>
+<body>
+ <nav>
+  <div class="logo-container">
+    <img src="C:\Users\l\hack\webicon.png" alt="logo" class="logo">
+    <span class="site-name">MyWebsite</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#">HOME</a></li>
+    <li><a href="#">EXERCISE</a></li>
+    <li><a class="main" href="achievements.html">ACHIEVEMENT</a></li>
+    <li><a href="#">ROUTINES</a></li>
+    <li><a href="#">PROFILE</a></li>
+  </ul>
+</nav>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Dashboard</title>
+  <style>
+    /* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: linear-gradient(120deg, #1a1a1a, #333);
+  color: #fff;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Hero */
+.hero {
+  padding: 2rem;
+  background: linear-gradient(180deg, #2c3e50, #34495e);
+  border-bottom: 3px solid #27ae60;
+}
+
+.hero h1 {
+  margin-bottom: 1rem;
+}
+
+.health-ring {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 1rem auto;
+  border: 8px solid #27ae60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.quick-actions button {
+  margin: 0.5rem;
+  padding: 0.7rem 1.2rem;
+  border: none;
+  border-radius: 25px;
+  background: #27ae60;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.quick-actions button:hover {
+  background: #2ecc71;
+}
+
+/* Snapshot */
+.snapshot {
+  padding: 2rem;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  background: #222;
+  padding: 1rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+}
+
+/* Achievements */
+.achievements {
+  padding: 2rem;
+  background: #2c3e50;
+}
+
+.achievements ul {
+  list-style: none;
+}
+
+.achievements li {
+  margin: 1rem 0;
+  text-align: left;
+}
+
+/* Tip */
+.tip {
+  padding: 2rem;
+}
+
+.tip button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: #e67e22;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.tip button:hover {
+  background: #d35400;
+}
+
+/* Footer */
+footer {
+  padding: 1rem;
+  background: #111;
+  border-top: 3px solid #27ae60;
+}
+
+  </style>
+</head>
+<body>
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-content">
+      <h1 id="greeting">Good Day, User 👋</h1>
+      <div class="health-ring">
+        <span id="health-score">78</span>
+      </div>
+      <div class="quick-actions">
+        <button>🍎 Log Meal</button>
+        <button>🏃 Start Workout</button>
+        <button>📊 Check Progress</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Health Snapshot -->
+  <section class="snapshot">
+    <h2>Today's Health Snapshot</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>🚶 Steps</h3>
+        <p><span id="steps">4,200</span>/6,000</p>
+      </div>
+      <div class="card">
+        <h3>💧 Water</h3>
+        <p><span id="water">5</span>/8 glasses</p>
+      </div>
+      <div class="card">
+        <h3>🛌 Sleep</h3>
+        <p><span id="sleep">6.5</span>/8 hrs</p>
+      </div>
+      <div class="card">
+        <h3>🔥 Calories</h3>
+        <p><span id="calories">350</span>/500 kcal</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Achievements -->
+  <section class="achievements">
+    <h2>Achievements & Challenges</h2>
+    <ul>
+      <li>🥇 Hydration Hero – Drink 8 glasses of water <progress value="5" max="8"></progress></li>
+      <li>🌙 Early Bird – Sleep before 11 PM for 5 days <progress value="2" max="5"></progress></li>
+      <li>💪 Consistency King – Workout 4 times this week <progress value="1" max="4"></progress></li>
+    </ul>
+  </section>
+
+  <!-- Daily Tip -->
+  <section class="tip">
+    <h2>💡 Daily Health Tip</h2>
+    <p id="tip-text">Did you know? A 10-minute walk after meals helps regulate blood sugar.</p>
+    <button onclick="newTip()">Show another tip</button>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>Every step counts. Keep moving forward 🚀</p>
+  </footer>
+
+  <script>// Greeting based on time
+const greeting = document.getElementById("greeting");
+const hour = new Date().getHours();
+if (hour < 12) {
+  greeting.innerText = "Good Morning, User ☀️";
+} else if (hour < 18) {
+  greeting.innerText = "Good Afternoon, User 🌤️";
+} else {
+  greeting.innerText = "Good Evening, User 🌙";
+}
+
+// Health tips
+const tips = [
+  "Drink a glass of water before every meal to stay hydrated.",
+  "A 10-minute walk after meals helps regulate blood sugar.",
+  "Stretching for 5 minutes a day improves flexibility.",
+  "Aim for 7-8 hours of sleep for better recovery.",
+  "Replace sugary drinks with water or green tea."
+];
+
+function newTip() {
+  const random = Math.floor(Math.random() * tips.length);
+  document.getElementById("tip-text").innerText = tips[random];
+}
+</script>
+</body>
+</html>
