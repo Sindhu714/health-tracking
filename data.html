@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Data</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    table { margin: 50px auto; border-collapse: collapse; width: 50%; }
+    table, th, td { border: 1px solid black; padding: 10px; text-align: center; }
+    h2 { text-align: center; }
+  </style>
+</head>
+<body>
+  <h2>Registered User Data</h2>
+  <table id="userTable">
+    <tr>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Password</th>
+    </tr>
+  </table>
+
+  <script>
+    // Fetch stored values
+    const uname = localStorage.getItem("username");
+    const email = localStorage.getItem("email");
+    const password = localStorage.getItem("password");
+
+    if (uname && email && password) {
+      const table = document.getElementById("userTable");
+      const row = table.insertRow();
+      row.insertCell(0).innerText = uname;
+      row.insertCell(1).innerText = email;
+      row.insertCell(2).innerText = password;
+    } else {
+      document.body.innerHTML = "<h2>No user data found. Please register first.</h2>";
+    }
+  </script>
+</body>
+</html>

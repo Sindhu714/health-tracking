@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flexbox Navbar</title>
+  <style>
+    nav {
+  display: flex;
+  justify-content: space-between; /* logo+name on left, menu on right */
+  align-items: center;
+  padding: 0 20px;
+  height: 60px;
+  background: linear-gradient(to bottom, brown,grey);
+  border-bottom: 3px solid rgb(212, 72, 41);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center; /* Align logo and text vertically */
+  gap: 10px; /* Space between logo and text */
+}
+
+.logo {
+  height: 40px;  /* Small logo */
+  width: auto;
+}
+
+.site-name {
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+}
+.ach{
+    text-decoration:underline;
+    
+}
+  </style>
+</head>
+<body>
+ <nav>
+  <div class="logo-container">
+    <img src="webicon.png" alt="logo" class="logo">
+    <span class="site-name">REDEMPTION HEALTH</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="C:\xampp\mang\publicff\home.html">HOME</a></li>
+    <li><a href="C:\xampp\mang\publicff\exercise.html">EXERCISE</a></li>
+    <li><a href="C:\xampp\mang\publicff\achievements.html" >ACHIEVEMENT</a></li>
+    <li><a href="C:\xampp\mang\publicff\routines.html">ROUTINES</a></li>
+    <li><a href="#">PROFILE</a></li>
+  </ul>
+</nav>
+</body><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cowboy Profile</title>
+  <style>
+    body {
+  font-family: 'Rockwell', serif;
+  background: url('C:\Users\sindh\public\mang\publicff\user.png') no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  color: #f8f5e9;
+}
+
+.profile-container {
+  max-width: 900px;
+  margin: auto;
+  padding: 30px;
+  background: rgba(30, 20, 15, 0.92);
+  border: 6px solid #7c3f12;
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.7);
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.profile-avatar img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid #c97b32;
+  cursor: pointer;
+}
+
+.profile-name {
+  font-size: 2.2rem;
+  color: #e6b17e;
+  margin: 10px 0 5px;
+}
+
+.profile-tagline {
+  font-size: 1.2rem;
+  color: #d7c1a3;
+  font-style: italic;
+}
+
+.profile-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.detail-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid #7c3f12;
+  border-radius: 12px;
+  padding: 15px;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.detail-card:hover {
+  transform: scale(1.02);
+}
+
+.detail-card h3 {
+  margin-top: 0;
+  color: #f1d6b5;
+}
+
+.detail-card p,
+.detail-card ul {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
+.detail-card ul li {
+  list-style-type: "🔸 ";
+}
+
+.badges span {
+  display: inline-block;
+  margin: 4px;
+  padding: 6px 12px;
+  background: #c97b32;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.progress-bar {
+  background: #2c1a11;
+  border-radius: 8px;
+  height: 20px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-fill {
+  background: linear-gradient(to right, #c97b32, #e6b17e);
+  height: 100%;
+}
+
+.edit-btn {
+  background: #c97b32;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-family: 'Rockwell', serif;
+}
+
+.edit-btn:hover {
+  background: #8d5524;
+}
+
+/* Notification box */
+.notification-box {
+  position: fixed;
+  top: 20px;
+  right: -300px;
+  background: #3e2723;
+  color: #f8f5e9;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-family: 'Rockwell', serif;
+  font-size: 1rem;
+  box-shadow: 4px 4px 12px rgba(0,0,0,0.4);
+  transition: right 0.4s ease-in-out;
+  z-index: 9999;
+}
+
+.notification-box.show {
+  right: 20px;
+}
+
+  </style>
+</head>
+<body>
+  <div class="profile-container">
+    <!-- Avatar & Name -->
+    <div class="profile-header">
+      <div class="profile-avatar">
+        <img src="C:\xampp\mang\publicff\user.png" alt="Cowboy Avatar">
+      </div>
+      <h1 class="profile-name">Arthur Morgan</h1>
+      <p class="profile-tagline">“Outlaws to the end”</p>
+    </div>
+
+    <!-- Profile Details -->
+    <div class="profile-details">
+
+      <div class="detail-card">
+        <h3>📅 Age</h3>
+        <p>36</p>
+        <button class="edit-btn">Edit</button>
+      </div>
+
+      <div class="detail-card">
+        <h3>🌎 Location</h3>
+        <p>Valentine, New Hanover</p>
+        <button class="edit-btn">Edit</button>
+      </div>
+
+      <div class="detail-card">
+        <h3>🎯 Fitness Goal</h3>
+        <p>Improve Stamina & Strength</p>
+        <button class="edit-btn">Edit</button>
+      </div>
+
+      <div class="detail-card">
+        <h3>💪 Strength Level</h3>
+        <p>Intermediate</p>
+        <button class="edit-btn">Edit</button>
+      </div>
+
+      <div class="detail-card">
+        <h3>🏃 Stamina Level</h3>
+        <p>Advanced</p>
+        <button class="edit-btn">Edit</button>
+      </div>
+
+      <div class="detail-card">
+        <h3>🍖 Favorite Food</h3>
+        <p>Steak & Beans</p>
+        <button class="edit-btn">Edit</button>
+      </div>
+
+      <div class="detail-card">
+        <h3>🏆 Achievements</h3>
+        <ul>
+          <li>Completed 100 pushups challenge</li>
+          <li>5k run under 30 mins</li>
+        </ul>
+        <button class="edit-btn">Edit</button>
+      </div>
+
+      <div class="detail-card">
+        <h3>🎖️ Badges</h3>
+        <div class="badges">
+          <span>🤠 Cowboy Starter</span>
+          <span>🏹 Sharpshooter</span>
+          <span>🐎 Horse Tamer</span>
+        </div>
+      </div>
+
+      <div class="detail-card">
+        <h3>📊 Progress</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width:70%"></div>
+        </div>
+        <p>70% completed towards next level</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification -->
+  <script>const editButtons = document.querySelectorAll(".edit-btn");
+const notificationBox = document.createElement("div");
+notificationBox.className = "notification-box";
+document.body.appendChild(notificationBox);
+
+function showNotification(message) {
+  notificationBox.textContent = "🤠 " + message;
+  notificationBox.classList.add("show");
+
+  setTimeout(() => {
+    notificationBox.classList.remove("show");
+  }, 3000);
+}
+
+// Editable fields
+editButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const card = btn.closest(".detail-card");
+    const content = card.querySelector("p");
+
+    if (!content) {
+      showNotification("Editing this field is not supported yet, partner!");
+      return;
+    }
+
+    const currentText = content.textContent;
+    const input = document.createElement("input");
+    input.type = "text";
+    input.value = currentText;
+    input.className = "edit-input";
+
+    card.replaceChild(input, content);
+
+    input.focus();
+
+    input.addEventListener("blur", () => {
+      const newText = input.value.trim() || currentText;
+      const newP = document.createElement("p");
+      newP.textContent = newText;
+      card.replaceChild(newP, input);
+      showNotification("Profile updated successfully!");
+    });
+  });
+});
+
+// Avatar change
+const avatarImg = document.querySelector(".profile-avatar img");
+avatarImg.addEventListener("click", () => {
+  const fileInput = document.createElement("input");
+  fileInput.type = "file";
+  fileInput.accept = "image/*";
+
+  fileInput.onchange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (ev) {
+        avatarImg.src = ev.target.result;
+        showNotification("Avatar changed! Looking sharp, cowboy!");
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  fileInput.click();
+});
+</script>
+</body>
+</html>

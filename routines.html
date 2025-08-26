@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flexbox Navbar</title>
+  <style>
+    nav {
+  display: flex;
+  justify-content: space-between; /* logo+name on left, menu on right */
+  align-items: center;
+  padding: 0 20px;
+  height: 60px;
+  background: linear-gradient(to bottom, rgb(100, 100, 246),grey);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center; /* Align logo and text vertically */
+  gap: 10px; /* Space between logo and text */
+}
+
+.logo {
+  height: 40px;  /* Small logo */
+  width: auto;
+}
+
+.site-name {
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+.navlinks:hover{
+    transition:scale(1.2) rotate(5deg);
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+}
+  </style>
+</head>
+<body>
+ <nav>
+  <div class="logo-container">
+    <img src="webicon.png" alt="logo" class="logo">
+    <span class="site-name">REDEMPTION HEALTH</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="C:\xampp\mang\publicff\home.html">HOME</a></li>
+    <li><a href="C:\xampp\mang\publicff\exercise.html">EXERCISE</a></li>
+    <li><a class="main" href="C:\xampp\mang\publicff\achievements.html">ACHIEVEMENT</a></li>
+    <li><a href="C:\xampp\mang\publicff\routines.html">ROUTINES</a></li>
+    <li><a href="C:\xampp\mang\publicff\profile.html">PROFILE</a></li>
+  </ul>
+</nav>
+</body>
+</html>
+<!DOCTYPE html><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cowboy Health Dashboard & Notifications</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #1E2561 0%, #232E57 100%);
+      color: #eaf6fb;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 1300px;
+      margin: auto;
+      padding: 2rem;
+    }
+    nav {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    nav button {
+      background: linear-gradient(90deg,#3CF2C7,#2D8AF2);
+      color: #243169;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: none;
+      padding: 10px 28px;
+      border-radius: 14px;
+      margin: 0 12px;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: background 0.2s;
+    }
+    nav button.active {
+      background: linear-gradient(91deg,#ffdc5c, #ff607f);
+      color: #232C4C;
+    }
+    h1 {
+      text-align: center;
+      background: linear-gradient(90deg,#3CF2C7,#2D8AF2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 2.3rem;
+      margin-bottom: 2rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+    .panel {
+      background: linear-gradient(135deg, #293869 55%, #235269 100%);
+      box-shadow: 0 4px 20px #181d35a0, 0 1px 8px #25328a55 inset;
+      border-radius: 18px;
+      padding: 1.5rem 1.3rem 1.3rem 1.3rem;
+      position: relative;
+      transition: box-shadow 0.25s;
+    }
+    .panel:hover {
+      box-shadow: 0 12px 40px #00796bc0, 0 2px 24px #25328a99 inset;
+    }
+    .panel-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      letter-spacing: 1px;
+      color: #68fead;
+    }
+    .panel .value {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      color: #ffd600;
+      text-shadow: 1px 2px 18px #fff48bb0;
+      letter-spacing: 1px;
+    }
+    button, select, input[type=number] {
+      font-size: 1rem;
+      border-radius: 8px;
+      border: none;
+      padding: 5px 12px;
+      margin: 2px;
+      font-weight: 600;
+      color: #243169;
+      background: linear-gradient(90deg,#b2fe3c 0%,#3cf2c7 100%);
+      box-shadow: 0 2px 7px #02bfae44;
+    }
+    input[type=number] {
+      width: 80px;
+      background: #f8fafc;
+    }
+    .input-row { display: flex; align-items: center; margin-bottom: 1rem; }
+    .input-row label { margin-right: 8px; font-weight: 500; }
+    .input-row input, select {margin-right: 5px;}
+    .list { list-style: none; padding:0;margin:0; }
+    .list li { margin-bottom:4px; font-size:1rem;}
+    canvas { background: #182145; border-radius: 12px; margin-top:1rem;}
+    .status-group { display: flex; gap: 0.5rem; margin-bottom:0.9rem;}
+    .status-pill {
+      border-radius: 20px;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 7px 20px;
+      color: #fff;
+      background: linear-gradient(65deg,#6af774,#3cf2c7);
+      box-shadow: 0 1px 8px #44bfa966;
+      display: flex; align-items: center;
+    }
+    .status-yellow { background: linear-gradient(61deg,#fff79a,#ffb950); color: #223b5b;}
+    .status-red { background: linear-gradient(90deg,#ff607f,#e9487b);}
+    .small-txt { font-size:0.90rem; color: #ffeb3b; }
+    .med-btn { background:linear-gradient(70deg,#ffca61,#f99f86);color:#222; font-weight:700;}
+    .panel .details-list{margin:0.7rem 0 0 0;}
+    .climate-row span{ margin-right:12px;}
+    .panel-title-icon { margin-right:7px; vertical-align: middle; font-size:1.3em; }
+    .panel-metric {
+      width: 95px; height: 95px; border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%,#fff49940 0%,#ff6f3c20 100%);
+      display:flex;align-items:center;justify-content:center;
+      margin-bottom:0.7rem;margin-top:0.2rem;
+    }
+    .panel-metric .metric-val {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #ffd600;
+      text-shadow: 0px 2px 16px #ffeebb99;
+    }
+    .panel-metric .metric-unit { font-size:1rem;color: #90caf9;}
+    /* Notification Page Styles */
+    #notificationsSection .notification {
+      background: #FF607F;
+      color: #fff;
+      border-radius: 8px;
+      padding:1rem;
+      margin-bottom:1rem;
+      font-size: 1.1rem;
+    }
+    #notificationsSection .okay {
+      background:#7AF47B;
+      color:#222;
+    }
+    #sendNotifBtn {
+      display:inline-block;
+      background: #3CF2C7; color:#222; padding:8px 20px;
+      border-radius:8px; border:none; font-weight:bold;cursor:pointer;margin-top:8px;
+    }
+    #resetBtn {
+      background:#ff607f;color:#fff;padding:6px 18px;border-radius:8px;border:none;font-weight:bold;
+      margin-top:20px;display:block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Navigation -->
+    <nav>
+      <button id="tabDashboard" class="active" onclick="showSection('dashboard')">Dashboard</button>
+      <button id="tabNotifications" onclick="showSection('notifications')">Notifications</button>
+    </nav>
+    <!-- Dashboard Section -->
+    <div id="dashboardSection">
+      <h1>Cowboy Health & Routine Dashboard</h1>
+      <div class="dashboard-grid">
+        <!-- Routine Card -->
+        <div class="panel">
+          <span class="panel-title"><span class="panel-title-icon">&#128197;</span>Routine</span>
+          <ul class="list" id="routineList"></ul>
+        </div>
+        <!-- Food Card -->
+        <div class="panel">
+          <span class="panel-title"><span class="panel-title-icon">&#127828;</span>Food Intake</span>
+          <form id="foodForm">
+            <div class="input-row">
+              <label>Type:</label>
+              <select id="foodType">
+                <option>Protein</option>
+                <option>Carbs</option>
+                <option>Veggies</option>
+                <option>Fruits</option>
+                <option>Dairy</option>
+              </select>
+              <label>Servings:</label>
+              <input type="number" id="foodServings" min="1" max="10" value="1">
+              <button type="submit">Add</button>
+            </div>
+          </form>
+          <canvas id="foodChart" height="85"></canvas>
+          <ul class="details-list" id="foodList"></ul>
+        </div>
+        <!-- Water Card -->
+        <div class="panel">
+          <span class="panel-title"><span class="panel-title-icon">&#128167;</span>Water Intake (L)</span>
+          <form id="waterForm">
+            <div class="input-row">
+              <label>Amount:</label>
+              <input type="number" id="waterAmount" min="0" max="5" step="0.1" value="0.5">
+              <button type="submit">Add</button>
+            </div>
+          </form>
+          <div class="panel-metric">
+            <span class="metric-val" id="waterToday">0</span>
+            <span class="metric-unit">&nbsp;L</span>
+          </div>
+          <canvas id="waterChart" height="85"></canvas>
+        </div>
+        <!-- Medicines Card -->
+        <div class="panel">
+          <span class="panel-title"><span class="panel-title-icon">&#128300;</span>Medicines</span>
+          <ul class="details-list" id="medicineList"></ul>
+          <button class="med-btn" onclick="addMedicine()">Add Medicine Dose</button>
+        </div>
+        <!-- Heart Rate Card -->
+        <div class="panel">
+          <span class="panel-title"><span class="panel-title-icon">&#128148;</span>Heart Rate</span>
+          <div class="panel-metric">
+            <span class="metric-val" id="heartRateVal">---</span>
+            <span class="metric-unit">&nbsp;bpm</span>
+          </div>
+          <canvas id="heartChart" height="85"></canvas>
+        </div>
+        <!-- SpO2 Card -->
+        <div class="panel">
+          <span class="panel-title"><span class="panel-title-icon">&#128167;</span>SpO₂</span>
+          <div class="panel-metric">
+            <span class="metric-val" id="spo2Val">---</span>
+            <span class="metric-unit">&nbsp;%</span>
+          </div>
+          <canvas id="spo2Chart" height="85"></canvas>
+        </div>
+        <!-- Climate Card -->
+        <div class="panel">
+          <span class="panel-title"><span class="panel-title-icon">&#127780;</span>Climate</span>
+          <div class="climate-row">
+            <span>Temp: <span id="climateTemp">--</span>°C</span>
+            <span>Humidity: <span id="climateHum">--</span>%</span>
+            <span>Sky: <span id="climateCond">--</span></span>
+          </div>
+        </div>
+        <!-- Exercise Card -->
+        <div class="panel">
+          <span class="panel-title"><span class="panel-title-icon">&#127939;</span>Exercise</span>
+          <div class="small-txt">Current: <span id="currentWorkout"></span></div>
+          <canvas id="exerciseChart" height="90"></canvas>
+        </div>
+        <!-- Status Card -->
+        <div class="panel">
+          <span class="panel-title">Status</span>
+          <div class="status-group">
+            <span class="status-pill" id="promotersVal">Promoters: 69%</span>
+            <span class="status-pill status-yellow" id="passivesVal">Passives: 18%</span>
+            <span class="status-pill status-red" id="detractorsVal">Detractors: 13%</span>
+          </div>
+          <ul class="details-list" style="margin-top:1rem;">
+            <li>Customer Satisfaction Score (CSAT): <span id="csatVal">74%</span></li>
+            <li>Net Promoter Score (NPS): <span id="npsVal">61%</span></li>
+            <li>Effort Score (CES): <span id="cesVal">77.2%</span></li>
+          </ul>
+        </div>
+      </div>
+      <button id="resetBtn" onclick="localStorage.clear();location.reload()">Reset Dashboard Data</button>
+    </div>
+    <!-- Notifications Section -->
+    <div id="notificationsSection" style="display:none;">
+      <h1>Notifications</h1>
+      <div id="notifications"></div>
+      <button id="sendNotifBtn" onclick="sendDeviceNotification()">Send Device Notification</button>
+    </div>
+  </div>
+  <script>
+    function showSection(section) {
+      document.getElementById('dashboardSection').style.display = (section==='dashboard') ? '' : 'none';
+      document.getElementById('notificationsSection').style.display = (section==='notifications') ? '' : 'none';
+      document.getElementById('tabDashboard').classList.toggle('active', section==='dashboard');
+      document.getElementById('tabNotifications').classList.toggle('active', section==='notifications');
+      if(section==='notifications') generateNotifications();
+    }
+    // Dashboard Data and "Fake DB" using localStorage
+    function fakeDBSave(data) { localStorage.setItem('cowboyDashboardDB', JSON.stringify(data)); }
+    function fakeDBLoad() { return JSON.parse(localStorage.getItem('cowboyDashboardDB') || '{}'); }
+    // At startup: load DB or initialize if empty
+    let db = fakeDBLoad();
+    let foodData   = db.foodData   || { Protein: 0, Carbs: 0, Veggies: 0, Fruits: 0, Dairy: 0 };
+    let foodHistory = db.foodHistory || [];
+    let waterHistory = db.waterHistory || [];
+    let medicineHistory = db.medicineHistory || [];
+    let heartVals = db.heartVals || Array(10).fill(80);
+    let heartRateVal = heartVals[heartVals.length-1];
+    let spo2Vals = db.spo2Vals || Array(10).fill(97);
+    let spo2Val = spo2Vals[spo2Vals.length-1];
+    let climateTemp = db.climateTemp || 25;
+    let climateHum = db.climateHum || 55;
+    let climateCond = db.climateCond || 'Sunny';
+    let workoutVals = db.workoutVals || [40,30,20,20,30];
+    let currentWorkout = db.currentWorkout || 'Cardio';
+    let promotersVal = db.promotersVal || 69, passivesVal = db.passivesVal || 18, detractorsVal = db.detractorsVal || 13;
+    let csatVal = db.csatVal || 74, npsVal = db.npsVal || 61, cesVal = db.cesVal || "77.2";
+
+    // Routine Section
+    const routines = [
+      "5:00 AM - Wake Up", "5:30 AM - Feeding Cattle", "7:00 AM - Breakfast",
+      "8:00 AM - Fence Check & Repair", "10:30 AM - Water Break",
+      "12:30 PM - Lunch", "2:00 PM - Horse Riding", "4:00 PM - Rest",
+      "6:00 PM - Dinner", "8:00 PM - Medicine", "9:30 PM - Sleep"
+    ];
+    document.getElementById('routineList').innerHTML = routines.map(r=>`<li>${r}</li>`).join('');
+    // Food Intake
+    function renderFoodChart() {
+      foodChart.data.datasets[0].data = Object.values(foodData);
+      foodChart.update();
+      document.getElementById('foodList').innerHTML =
+        foodHistory.slice(-5).map(f=>`<li>${f.servings}x ${f.type} (${f.time})</li>`).join('');
+      saveAllData();
+    }
+    document.getElementById('foodForm').onsubmit = function(ev){
+      ev.preventDefault();
+      const type = document.getElementById('foodType').value;
+      const serv = parseInt(document.getElementById('foodServings').value, 10);
+      foodData[type] += serv;
+      foodHistory.push({type, servings: serv, time: new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})});
+      renderFoodChart();
+    };
+    const foodChart = new Chart(document.getElementById('foodChart'), {
+      type: 'bar',
+      data: {
+        labels: Object.keys(foodData),
+        datasets: [{
+          label: 'Servings',
+          data: Object.values(foodData),
+          backgroundColor: ["#7AF47B", "#3CF2C7", "#FFDC5C", "#FF607F", "#8d6e63"]
+        }]
+      },
+      options: {
+        responsive:true, plugins:{legend:{display:false}},
+        scales: { y: { beginAtZero:true, ticks:{color:"#fff"}} , x:{ticks:{color:"#fff"}} }
+      }
+    });
+    // Water Intake
+    function renderWaterChart() {
+      const total = waterHistory.reduce((a,b)=>a+b,0);
+      document.getElementById('waterToday').textContent = total.toFixed(2);
+      waterChart.data.datasets[0].data = waterHistory.slice(-7);
+      waterChart.update();
+      saveAllData();
+    }
+    document.getElementById('waterForm').onsubmit = function(ev){
+      ev.preventDefault();
+      const amt = parseFloat(document.getElementById('waterAmount').value);
+      waterHistory.push(amt);
+      renderWaterChart();
+    };
+    const waterChart = new Chart(document.getElementById('waterChart'), {
+      type: 'line',
+      data: {
+        labels: Array(7).fill(''),
+        datasets: [{
+          label: 'Water',
+          data: [],
+          backgroundColor:'#3CF2C744',
+          borderColor:'#3CF2C7',
+          tension: 0.45,
+          fill: true
+        }]
+      },
+      options:{responsive:true, plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{color:"#fff"}}}}
+    });
+    // Medicines Logic
+    function addMedicine(){
+      const time = new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+      medicineHistory.push(`Medicine taken at ${time}`);
+      renderMedicines();
+    }
+    function renderMedicines(){
+      document.getElementById('medicineList').innerHTML =
+        medicineHistory.slice(-5).map(m=>`<li>${m}</li>`).join('');
+      saveAllData();
+    }
+    // Health simulation
+    function random(min, max){ return Math.floor(Math.random()*(max-min+1))+min; }
+    function updateHeartRate(){
+      const rate = random(65,105);
+      heartRateVal = rate;
+      document.getElementById('heartRateVal').textContent = rate;
+      heartVals.push(rate); if(heartVals.length > 10) heartVals.shift();
+      heartChart.data.datasets[0].data = [...heartVals];
+      heartChart.update();
+      saveAllData();
+    }
+    const heartChart = new Chart(document.getElementById('heartChart'), {
+      type: 'line',
+      data: {
+        labels: Array(10).fill(''),
+        datasets: [{
+          label: 'Heart Rate',
+          data: [...heartVals],
+          borderColor: "#FF607F",
+          backgroundColor: "#FF607F30",
+          tension:0.38,
+          fill:true
+        }]
+      },
+      options:{responsive:true, plugins:{legend:{display:false}},scales:{y:{ticks:{color:"#fff"}}}}
+    });
+    setInterval(updateHeartRate, 3000);
+    function updateSpo2(){
+      const spo2 = random(94,99);
+      spo2Val = spo2;
+      document.getElementById('spo2Val').textContent = spo2;
+      spo2Vals.push(spo2); if(spo2Vals.length>10) spo2Vals.shift();
+      spo2Chart.data.datasets[0].data = [...spo2Vals];
+      spo2Chart.update();
+      saveAllData();
+    }
+    const spo2Chart = new Chart(document.getElementById('spo2Chart'), {
+      type:'line',
+      data:{
+        labels:Array(10).fill(''),
+        datasets:[{
+          label:'SpO₂',
+          data:[...spo2Vals],
+          borderColor:'#7AF47B',
+          backgroundColor:'#7AF47B44',
+          tension:0.38,
+          fill:true
+        }]
+      },
+      options:{responsive:true, plugins:{legend:{display:false}},scales:{y:{ticks:{color:"#fff"}}}}
+    });
+    setInterval(updateSpo2, 4000);
+    function updateClimate(){
+      climateTemp = random(12,39);
+      climateHum = random(35,78);
+      climateCond = ["Sunny","Rain","Cloudy","Windy","Foggy"][random(0,4)];
+      document.getElementById('climateTemp').textContent = climateTemp;
+      document.getElementById('climateHum').textContent = climateHum;
+      document.getElementById('climateCond').textContent = climateCond;
+      saveAllData();
+    }
+    updateClimate();
+    setInterval(updateClimate, 7500);
+    function updateWorkout(){
+      const workouts = ["Cardio","Strength","Riding","Yoga","Rest"];
+      currentWorkout = workouts[random(0,4)];
+      document.getElementById('currentWorkout').textContent = currentWorkout;
+      workoutVals = [
+        random(30,60), random(20,40), random(15,25), random(10,16), random(8,30)
+      ];
+      exerciseChart.data.datasets[0].data = workoutVals;
+      exerciseChart.update();
+      saveAllData();
+    }
+    const exerciseChart = new Chart(document.getElementById('exerciseChart'), {
+      type:'doughnut',
+      data:{
+        labels:["Cardio","Strength","Riding","Yoga","Rest"],
+        datasets:[{
+          data:workoutVals,
+          backgroundColor:["#3CF2C7","#7AF47B","#FFDC5C","#FF607F","#8d6e63"]
+        }]
+      },
+      options:{responsive:true, plugins:{legend:{position:'bottom',labels:{color:'#fff'}}}}
+    });
+    updateWorkout();
+    setInterval(updateWorkout, 6000);
+    function updateStatus(){
+      promotersVal = random(60,76);
+      passivesVal = random(15,22);
+      detractorsVal = random(8,17);
+      csatVal = random(65,81);
+      npsVal = random(45,70);
+      cesVal = (random(70,85) + Math.random()).toFixed(1);
+      document.getElementById('promotersVal').textContent = 'Promoters: ' + promotersVal + '%';
+      document.getElementById('passivesVal').textContent = 'Passives: ' + passivesVal + '%';
+      document.getElementById('detractorsVal').textContent = 'Detractors: ' + detractorsVal + '%';
+      document.getElementById('csatVal').textContent = csatVal + '%';
+      document.getElementById('npsVal').textContent = npsVal + '%';
+      document.getElementById('cesVal').textContent = cesVal + '%';
+      saveAllData();
+    }
+    updateStatus();
+    setInterval(updateStatus, 10000);
+
+    function saveAllData() {
+      fakeDBSave({
+        foodData, foodHistory, waterHistory, medicineHistory,
+        heartVals, heartRateVal, spo2Vals, spo2Val,
+        climateTemp, climateHum, climateCond,
+        workoutVals, currentWorkout,
+        promotersVal, passivesVal, detractorsVal, csatVal, npsVal, cesVal
+      });
+      localStorage.setItem('dashboardData', JSON.stringify({
+        waterHistory, medicineHistory, foodHistory, foodData,
+        heartVals, heartRateVal, spo2Vals, spo2Val,
+        climateTemp, climateHum, climateCond,
+        workoutVals, currentWorkout,
+        promotersVal, passivesVal, detractorsVal, csatVal, npsVal, cesVal
+      }));
+    }
+    // Initial Rendering
+    renderFoodChart();
+    renderWaterChart();
+    renderMedicines();
+
+    // Notifications Page: Generate alerts from dashboard data
+    function generateNotifications() {
+      let data = JSON.parse(localStorage.getItem('dashboardData') || '{}');
+      let notifications = [];
+      // Sample rules
+      const totalWater = (data.waterHistory||[]).reduce((a,b)=>a+b,0);
+      if (totalWater < 2) notifications.push("🚰 Low water intake today! Drink at least 2L.");
+      if (!data.medicineHistory || data.medicineHistory.length === 0) notifications.push("💊 Medicine not taken today.");
+      if (data.heartRateVal > 100) notifications.push(`❤️ High heart rate: ${data.heartRateVal} bpm`);
+      if (data.spo2Val < 95) notifications.push(`🩺 Low SpO₂: ${data.spo2Val}%`);
+      if (data.climateCond && data.climateCond === "Rain") notifications.push("🌧️ Climate Alert: Rainy. Plan accordingly.");
+      // Render notifications
+      let notifDiv = document.getElementById('notifications');
+      if (notifications.length > 0) {
+        notifDiv.innerHTML = notifications.map(msg => `<div class="notification">${msg}</div>`).join('');
+        document.getElementById('sendNotifBtn').style.display = '';
+      } else {
+        notifDiv.innerHTML = `<div class="notification okay">All health indicators normal. No alerts!</div>`;
+        document.getElementById('sendNotifBtn').style.display = 'none';
+      }
+    }
+    // Browser Notification API
+    function sendDeviceNotification() {
+      if (Notification.permission === "granted") {
+        showDeviceNotification();
+      } else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then(perm => {
+          if (perm === "granted") showDeviceNotification();
+        });
+      }
+    }
+    function showDeviceNotification() {
+      let msg = document.querySelector('#notificationsSection .notification');
+      if (msg) new Notification('Cowboy Dashboard Alert', { body: msg.textContent });
+    }
+
+    // ---- Automatic popup every 10 seconds ----
+    function autoPopupNotification() {
+      let data = JSON.parse(localStorage.getItem('dashboardData') || '{}');
+      let notifications = [];
+      const totalWater = (data.waterHistory||[]).reduce((a,b)=>a+b,0);
+      if (totalWater < 2) notifications.push("🚰 Low water intake today! Drink at least 2L.");
+      if (!data.medicineHistory || data.medicineHistory.length === 0) notifications.push("💊 Medicine not taken today.");
+      if (data.heartRateVal > 100) notifications.push(`❤️ High heart rate: ${data.heartRateVal} bpm`);
+      if (data.spo2Val < 95) notifications.push(`🩺 Low SpO₂: ${data.spo2Val}%`);
+      if (data.climateCond && data.climateCond === "Rain") notifications.push("🌧️ Climate Alert: Rainy. Plan accordingly.");
+      if (notifications.length > 0) {
+        if (Notification.permission === "granted") {
+          new Notification('Cowboy Dashboard Alert', { body: notifications[0] });
+        } else if (Notification.permission !== "denied") {
+          Notification.requestPermission().then(perm => {
+            if (perm === "granted") {
+              new Notification('Cowboy Dashboard Alert', { body: notifications });
+            }
+          });
+        }
+      }
+    }
+    setInterval(autoPopupNotification, 10000);
+    // Default tab
+    showSection('dashboard');
+  </script>
+</body>
+</html>
